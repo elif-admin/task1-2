@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  database:
+    image: mysql:5.7
+    container_name: database
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456e"
+      MYSQL_DATABASE: clarusway
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: Clarusway_1
+    networks:
+      - clarusnet
+
+  api-app:
+    image: elifadmin/dockercompose
+    container_name: api-app
+    restart: always
+    depends_on:
+      - database
+    ports:
+      - "80:80"
+    networks:
+      - clarusnet
+
+networks:
+  clarusnet:
+    driver: bridge
